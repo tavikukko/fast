@@ -1,7 +1,7 @@
 {
   "name": "@microsoft/fast-tooling-wasm",
   "description": "A set of tooling utilities which has a WASM compile target",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "author": {
     "name": "Microsoft",
@@ -19,8 +19,7 @@
     "build": "yarn build:permutator",
     "build:permutator": "node ./permutator/build.js",
     "test:permutator": "node ./permutator/build.js --test && cd permutator/__tests__/ && ./test",
-    "start": "webpack-dev-server",
-    "test": "yarn test:permutator"
+    "start": "webpack-dev-server"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.0.3",

@@ -904,6 +904,8 @@ export class TextField extends FormAssociated<HTMLInputElement> {
     handleChange(): void;
     // @internal
     handleTextInput(): void;
+    // @internal (undocumented)
+    keypressHandler: (e: KeyboardEvent) => boolean;
     list: string;
     maxlength: number;
     minlength: number;
