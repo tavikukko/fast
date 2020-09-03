@@ -1,5 +1,11 @@
 import { css } from "@microsoft/fast-element";
-import { disabledCursor, display, focusVisible } from "@microsoft/fast-foundation";
+import {
+    disabledCursor,
+    display,
+    focusVisible,
+    forcedColorsStylesheetBehavior,
+} from "@microsoft/fast-foundation";
+import { SystemColors } from "@microsoft/fast-web-utilities";
 import { heightNumber } from "../size";
 import {
     accentFillActiveBehavior,
@@ -24,7 +30,7 @@ import {
  * @internal
  */
 export const BaseButtonStyles = css`
-    ${display("inline-block")} :host {
+    ${display("inline-flex")} :host {
         font-family: var(--body-font);
         outline: none;
         font-size: var(--type-ramp-base-font-size);
@@ -34,7 +40,7 @@ export const BaseButtonStyles = css`
         background-color: ${neutralFillRestBehavior.var};
         color: ${neutralForegroundRestBehavior.var};
         border-radius: calc(var(--corner-radius) * 1px);
-        fill: currentColor;
+        fill: currentcolor;
         cursor: pointer;
     }
 
@@ -55,6 +61,7 @@ export const BaseButtonStyles = css`
         border-radius: inherit;
         fill: inherit;
         cursor: inherit;
+        font-family: inherit;
     }
 
     :host(:hover) {
@@ -86,7 +93,7 @@ export const BaseButtonStyles = css`
     .end,
     ::slotted(svg) {
         ${
-            /* Glyph size and margin-left is temporary - 
+            /* Glyph size and margin-left is temporary -
             replace when adaptive typography is figured out */ ""
         } width: 16px;
         height: 16px;
@@ -146,6 +153,7 @@ export const HypertextStyles = css`
         font-size: inherit;
         line-height: inherit;
         height: auto;
+        min-width: 0;
         background: transparent;
     }
 
@@ -242,7 +250,14 @@ export const LightweightButtonStyles = css`
     accentForegroundHoverBehavior,
     accentForegroundActiveBehavior,
     accentForegroundHoverBehavior,
-    neutralForegroundRestBehavior
+    neutralForegroundRestBehavior,
+    forcedColorsStylesheetBehavior(
+        css`
+            :host(.lightweight:hover) .content::before {
+                background: ${SystemColors.LinkText};
+            }
+        `
+    )
 );
 
 /**

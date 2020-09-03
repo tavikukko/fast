@@ -20,10 +20,9 @@ module.exports = {
         },
         navbar: {
             logo: {
-                alt:
-                    "Line drawing of a small moon orbiting around a planet with the words FAST next to it",
-                srcDark: "https://static.fast.design/assets/fast-inline-logo.svg",
-                src: "https://static.fast.design/assets/fast-inline-logo-light.svg",
+                alt: `Line drawing of a small moon orbiting around a planet with the words FAST next to it`,
+                srcDark: "/fast-inline-logo.svg",
+                src: "/fast-inline-logo-light.svg",
 
                 // FIXME: #3299 Docusaurus displays a blank page when clicking the logo link without workaround
                 target: "_blank",
@@ -97,8 +96,29 @@ module.exports = {
                         },
                     ],
                 },
+                {
+                    title: " ",
+                    items: [
+                        {
+                            label: "License",
+                            href: "https://github.com/microsoft/fast/blob/master/LICENSE",
+                        },
+                        {
+                            label: "Privacy & cookies",
+                            href: "https://go.microsoft.com/fwlink/?LinkId=521839",
+                        },
+                        {
+                            label: "Terms of use",
+                            href: "https://go.microsoft.com/fwlink/?LinkID=206977",
+                        },
+                        {
+                            label: "Trademarks",
+                            href: "https://www.microsoft.com/trademarks",
+                        },
+                    ],
+                },
             ],
-            copyright: `Copyright © Microsoft ${new Date().getFullYear()}`,
+            copyright: `© Microsoft ${new Date().getFullYear()}`,
         },
     },
     presets: [

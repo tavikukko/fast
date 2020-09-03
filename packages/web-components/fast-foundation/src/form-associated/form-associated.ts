@@ -85,6 +85,8 @@ interface HTMLElement {
     attachInternals?(): ElementInternals;
 }
 
+const proxySlotName = "form-associated-proxy";
+
 /**
  * @alpha
  */
@@ -181,6 +183,12 @@ export abstract class FormAssociated<
     private dirtyValue: boolean = false;
 
     /**
+     * Stores a reference to the slot element that holds the proxy
+     * element when it is appended.
+     */
+    private proxySlot: HTMLSlotElement | void;
+
+    /**
      * The value of the element to be associated with the form.
      */
     @observable
@@ -192,7 +200,7 @@ export abstract class FormAssociated<
      * @param next - the new value
      *
      * @remarks
-     * If elmements extending `FormAssociated` implement a `valueChanged` method
+     * If elements extending `FormAssociated` implement a `valueChanged` method
      * They must be sure to invoke `super.valueChanged(previous, next)` to ensure
      * proper functioning of `FormAssociated`
      */
@@ -444,8 +452,14 @@ export abstract class FormAssociated<
             if (typeof this.value === "string") {
                 this.proxy.value = this.value;
             }
+
+            this.proxy.setAttribute("slot", proxySlotName);
+
+            this.proxySlot = document.createElement("slot");
+            this.proxySlot.setAttribute("name", proxySlotName);
         }
 
+        this.shadowRoot?.appendChild(this.proxySlot as HTMLSlotElement);
         this.appendChild(this.proxy);
     }
 
@@ -454,6 +468,7 @@ export abstract class FormAssociated<
      */
     protected detachProxy() {
         this.removeChild(this.proxy);
+        this.shadowRoot?.removeChild(this.proxySlot as HTMLSlotElement);
     }
 
     /**
