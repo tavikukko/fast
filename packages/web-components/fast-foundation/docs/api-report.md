@@ -140,7 +140,7 @@ export class BreadcrumbItem extends FASTElement {
 }
 
 // @internal
-export interface BreadcrumbItem extends StartEnd, DelegatesARIABreadcrumbItem {
+export interface BreadcrumbItem extends StartEnd, DelegatesARIALink {
 }
 
 // @public
@@ -253,10 +253,6 @@ export interface DecoratorDesignSystemPropertyConfiguration extends Omit<Decorat
     attribute?: string | false;
     cssCustomProperty?: string | false;
     default: any;
-}
-
-// @public
-export class DelegatesARIABreadcrumbItem extends ARIAGlobalStatesAndProperties {
 }
 
 // @public
