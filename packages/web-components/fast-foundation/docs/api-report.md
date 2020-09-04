@@ -257,7 +257,6 @@ export interface DecoratorDesignSystemPropertyConfiguration extends Omit<Decorat
 
 // @public
 export class DelegatesARIABreadcrumbItem extends ARIAGlobalStatesAndProperties {
-    ariaExpanded: "true" | "false" | undefined;
 }
 
 // @public
