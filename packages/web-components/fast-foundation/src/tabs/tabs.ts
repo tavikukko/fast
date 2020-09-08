@@ -1,5 +1,6 @@
 import { attr, FASTElement, observable } from "@microsoft/fast-element";
 import {
+    Direction,
     keyCodeArrowDown,
     keyCodeArrowLeft,
     keyCodeArrowRight,
@@ -10,6 +11,7 @@ import {
 } from "@microsoft/fast-web-utilities";
 import { StartEnd } from "../patterns/start-end";
 import { applyMixins } from "../utilities/apply-mixins";
+import { getDirection } from "../utilities";
 
 /**
  * The orientation of the {@link @microsoft/fast-foundation#(Tabs:class)} component
@@ -116,6 +118,7 @@ export class Tabs extends FASTElement {
     private ticking: boolean = false;
     public tabIds: Array<string | null>;
     private tabpanelIds: Array<string | null>;
+    private direction: Direction;
 
     public change = (): void => {
         this.$emit("change", this.activetab);
@@ -232,11 +235,11 @@ export class Tabs extends FASTElement {
             switch (keyCode) {
                 case keyCodeArrowLeft:
                     event.preventDefault();
-                    this.adjust(-1);
+                    this.adjust(this.direction === Direction.rtl ? 1 : -1);
                     break;
                 case keyCodeArrowRight:
                     event.preventDefault();
-                    this.adjust(1);
+                    this.adjust(this.direction === Direction.rtl ? -1 : 1);
                     break;
             }
         } else {
@@ -333,6 +336,14 @@ export class Tabs extends FASTElement {
             this.tabpanelIds = this.getTabPanelIds();
             this.activeTabIndex = this.getActiveIndex();
         }
+    }
+
+    /**
+     * @internal
+     */
+    public connectedCallback(): void {
+        super.connectedCallback();
+        this.direction = getDirection(this);
     }
 }
 
